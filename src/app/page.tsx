@@ -1,9 +1,9 @@
-import Categories from '~/components/categories'
+import Cards from '~/modules/blog/cards'
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <main className="">
-      <Categories />
+    <main>
+      <Cards />
     </main>
   )
 }

@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+
 import prismaDb from '~/utils/prisma-db'
 
 export async function GET(req: Request) {
@@ -23,7 +24,19 @@ export async function GET(req: Request) {
     ])
     return NextResponse.json({ posts, count })
   } catch (err) {
-    console.log(err)
-    return new NextResponse('Internal server error', { status: 500 })
+    return new NextResponse(JSON.stringify({ message: err }), { status: 500 })
+  }
+}
+
+export const POST = async (req: Request) => {
+  try {
+    const body = await req.json()
+    const post = await prismaDb.post.create({
+      data: body,
+    })
+
+    return new NextResponse(JSON.stringify(post))
+  } catch (err) {
+    return new NextResponse(JSON.stringify({ message: err }), { status: 500 })
   }
 }

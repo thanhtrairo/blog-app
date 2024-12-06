@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+
 import prismaDb from '~/utils/prisma-db'
 
 const GET = async () => {

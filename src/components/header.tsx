@@ -4,18 +4,18 @@ import React from 'react'
 
 import ThemeToggle from './theme-switch'
 
-const Header = () => {
-  const socials = [
-    {
-      href: 'https://github.com/thanhtrairo?tab=repositories',
-      imageUrl: '/github.webp',
-    },
-    {
-      href: 'https://www.linkedin.com/in/nguy%E1%BB%85n-ti%E1%BA%BFn-th%C3%A0nh-a66287266',
-      imageUrl: '/linkedin.webp',
-    },
-  ]
+const socials = [
+  {
+    href: 'https://github.com/thanhtrairo?tab=repositories',
+    imageUrl: '/github.webp',
+  },
+  {
+    href: 'https://www.linkedin.com/in/nguy%E1%BB%85n-ti%E1%BA%BFn-th%C3%A0nh-a66287266',
+    imageUrl: '/linkedin.webp',
+  },
+]
 
+const Header = () => {
   return (
     <div className="flex h-24 items-center justify-between">
       <div className="flex gap-2 max-md:hidden">
@@ -26,7 +26,7 @@ const Header = () => {
         ))}
       </div>
       <div className="text-center text-2xl font-bold sm:text-3xl xl:text-4xl">
-        <Link href="/">thanhIamThings</Link>
+        <Link href="/">thanhtrairo</Link>
       </div>
       <ThemeToggle />
     </div>
