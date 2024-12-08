@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
+import './globals.css'
+
 import Header from '~/components/header'
 
 import ThemeContextProvider from '~/contexts/theme-context'
-
-import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} max-w-[100dvw] overflow-x-hidden`}>
+      <body suppressHydrationWarning={true} className={`${inter.className} max-w-[100dvw] overflow-x-hidden`}>
         <ThemeContextProvider>
           <div className="min-h-[100dvh] bg-white text-black dark:bg-black-c dark:text-white-c">
             <div className="container mx-auto px-2 sm:px-4 md:px-8 lg:px-12 xl:px-16 2xl:px-20">

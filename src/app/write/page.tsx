@@ -2,14 +2,21 @@
 
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import { FIleValues } from '~/models/file'
 
 import Tiptap from '~/components/tiptap'
+import { Button } from '~/components/ui/button'
+import { Input } from '~/components/ui/input'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '~/components/ui/select'
+import { UploadImage } from '~/components/widgets'
+
+import { PostService } from '~/services'
 
 type FormValues = {
   desc: string
   title: string
-  img: string
-  slug: string
+  imgUrl: string
+  file: FIleValues | null
   catSlug: string
 }
 
@@ -19,18 +26,16 @@ const WritePage = () => {
     catSlug: '',
     desc: '',
     title: '',
-    img: '',
-    slug: '',
+    imgUrl: '',
+    file: null,
   })
+  const [loading, setLoading] = useState(false)
 
-  console.log('formValues', formValues)
-
-  const handleChangeForm = (value: string, name: keyof FormValues) => {
-    console.log('value', value)
-    setFormValues({
-      ...formValues,
+  const handleChangeForm = (value: string | FIleValues, name: keyof FormValues) => {
+    setFormValues((prev) => ({
+      ...prev,
       [name]: value,
-    })
+    }))
   }
 
   const slugify = (str: string) =>
@@ -42,6 +47,25 @@ const WritePage = () => {
       .replace(/^-+|-+$/g, '')
 
   const handleSubmit = async () => {
+    try {
+      setLoading(true)
+      const { catSlug, desc, imgUrl, title } = formValues
+      const blog = await PostService.create({
+        catSlug: catSlug || 'style',
+        desc,
+        imgUrl,
+        slug: slugify(title),
+        title,
+      })
+      console.log('blog', blog)
+      // router.push(`blog/${blog.slug}`)
+    } catch (error) {
+      console.log('PostService', { PostService })
+      alert(error)
+    } finally {
+      setLoading(false)
+    }
+
     // const res = await fetch('/api/posts', {
     //   method: 'POST',
     //   body: JSON.stringify({
@@ -59,20 +83,27 @@ const WritePage = () => {
   }
 
   return (
-    <div className="">
-      <input type="text" placeholder="Title" className="" onChange={(e) => handleChangeForm(e.target.value, 'title')} />
-      <select className="" onChange={(e) => handleChangeForm(e.target.value, 'catSlug')}>
-        <option value="style">style</option>
-        <option value="fashion">fashion</option>
-        <option value="food">food</option>
-        <option value="culture">culture</option>
-        <option value="travel">travel</option>
-        <option value="coding">coding</option>
-      </select>
+    <div className="relative flex flex-col">
+      <Input placeholder="Title" className="" onChange={(e) => handleChangeForm(e.target.value, 'title')} />
+      <UploadImage
+        value={formValues.file}
+        onChange={(value) => handleChangeForm(value, 'file')}
+        onChangeImgUrl={(value) => handleChangeForm(value, 'imgUrl')}
+      />
+      <Select onValueChange={(value) => handleChangeForm(value, 'catSlug')} defaultValue={formValues.catSlug}>
+        <SelectTrigger>
+          <SelectValue placeholder="Select a category" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="m@example.com">m@example.com</SelectItem>
+          <SelectItem value="m@google.com">m@google.com</SelectItem>
+          <SelectItem value="m@support.com">m@support.com</SelectItem>
+        </SelectContent>
+      </Select>
       <Tiptap content={formValues.desc} onChange={(value) => handleChangeForm(value, 'desc')} />
-      <button className="" onClick={handleSubmit}>
+      <Button className="" onClick={handleSubmit}>
         Publish
-      </button>
+      </Button>
     </div>
   )
 }

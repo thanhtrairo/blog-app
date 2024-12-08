@@ -15,7 +15,8 @@ const DEFAULT_PAGE = 1
 
 const Cards = async ({ cat, page = DEFAULT_PAGE }: CardsProps) => {
   const data = await PostService.getAll({ cat, page })
-  return null
+  console.log('data', data)
+  return <></>
   if (!data) {
     return null
   }

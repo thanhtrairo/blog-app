@@ -1,7 +1,6 @@
 'use client'
 
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight'
-import Image from '@tiptap/extension-image'
 import Link from '@tiptap/extension-link'
 import Placeholder from '@tiptap/extension-placeholder'
 import Underline from '@tiptap/extension-underline'
@@ -13,6 +12,7 @@ import html from 'highlight.js/lib/languages/xml'
 import DOMPurify from 'isomorphic-dompurify'
 import { createLowlight } from 'lowlight'
 import { forwardRef, useEffect, useRef, useState } from 'react'
+import ImageResize from 'tiptap-extension-resize-image'
 
 import { Toolbar } from './components'
 import { Video } from './extensions'
@@ -76,10 +76,6 @@ const Tiptap = forwardRef<HTMLDivElement, TiptapProps>(({ disabled = false, cont
       }),
       CodeBlockLowlight.configure({
         lowlight,
-        HTMLAttributes: {
-          class: '',
-        },
-        defaultLanguage: 'js',
       }),
       Video,
       Underline,
@@ -89,15 +85,11 @@ const Tiptap = forwardRef<HTMLDivElement, TiptapProps>(({ disabled = false, cont
         },
       }),
       Placeholder.configure({
-        placeholder: 'Viết mô tả ...',
+        placeholder: 'Tell your story...',
         emptyNodeClass:
           'first:before:text-gray-500 first:before:float-left first:before:content-[attr(data-placeholder)] first:before:pointer-events-none',
       }),
-      Image.configure({
-        HTMLAttributes: {
-          class: 'w-full max-h-[420px] object-left object-cover',
-        },
-      }),
+      ImageResize,
     ] as Extensions,
     content,
     editorProps: {
@@ -119,7 +111,7 @@ const Tiptap = forwardRef<HTMLDivElement, TiptapProps>(({ disabled = false, cont
           editor?.setEditable(true)
         }
       } catch (error) {
-        alert('Lỗi hệ thống khi xóa files')
+        alert('System error while deleting files')
       }
     })()
   }, [editor, fileIds])

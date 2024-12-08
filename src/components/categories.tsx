@@ -1,7 +1,8 @@
 import Link from 'next/link'
 
-import { getCategories } from '~/services/category-service'
 import SectionHeading from './section-heading'
+
+import { getCategories } from '~/services/category-service'
 
 const Categories = async () => {
   const categories = await getCategories()

@@ -50,6 +50,7 @@ export const Toolbar = ({ editor }: ToolbarProps) => {
       editor.setEditable(true)
 
       if (resource_type.includes('image')) {
+        console.log('zo===')
         editor.chain().focus().setImage({ src: url }).run()
       }
       if (resource_type.includes('video')) {
@@ -59,7 +60,7 @@ export const Toolbar = ({ editor }: ToolbarProps) => {
       if (error instanceof Error) {
         alert(error.message)
       } else {
-        alert('Lỗi hệ thống')
+        alert('System error')
       }
     }
 
