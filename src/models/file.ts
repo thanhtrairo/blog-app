@@ -19,7 +19,7 @@ export type CreateFileRes = {
 const VIDEO_SIZE_MAX = 1024 * 1024 * 100 // 100 MB
 const IMAGE_SIZE_MAX = 1024 * 1024 * 5 // 5 MB
 
-const validImage = ['image/png', 'image/jpeg', 'image/jpg', 'image/webp']
+const validImage = ['image/png', 'image/jpeg', 'image/jpg', 'image/webp', 'image/gif']
 const validVideo = ['video/mp4', 'video/avi', 'video/mov', 'video/flv', 'video/wmv']
 
 export const validateImage = (file: File) => {

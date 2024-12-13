@@ -1,4 +1,4 @@
-import { TCategory } from './category'
+import { CAT_SLUG } from './category'
 
 export type TPost = {
   id: string
@@ -7,8 +7,7 @@ export type TPost = {
   desc: string
   imgUrl?: string
   views: number
-  catSlug: string
-  cat: TCategory
+  catSlug: CAT_SLUG | string
   createdAt: Date
 }
 

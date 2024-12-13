@@ -29,6 +29,8 @@
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
     --gray-c: #626262;
+    --gray-c1: #3d25141f;
+    --gray-c2: #e5e5e5;
     --white-c: #f0f0f0;
     --black-c: #0f172a;
   }
@@ -59,6 +61,7 @@
     --chart-5: 340 75% 55%;
   }
 }
+
 @layer base {
   * {
     @apply border-border;
@@ -66,10 +69,30 @@
   body {
     @apply bg-background text-foreground;
   }
+  .reset-css-tailwind {
+    @apply max-w-none px-6 py-4 [&_*]:m-0 [&_*]:p-0 [&_h1]:text-3xl [&_h2]:text-2xl [&_ol]:ml-4 [&_ol]:list-decimal [&_ul]:ml-4 [&_ul]:list-disc;
+  }
 }
 
 .tiptap:first-child {
   margin-top: 0;
+}
+
+.tiptap img {
+  margin: 1rem 0px;
+}
+
+.tiptap code {
+  background-color: var(--gray-c2);
+  border-radius: 0.4rem;
+  font-size: 0.85rem;
+  padding: 0.25em 0.3em;
+}
+
+.tiptap blockquote {
+  border-left: 2px solid var(--gray-c1);
+  margin: 0.5rem 0;
+  padding-left: 1rem;
 }
 
 .tiptap pre {
@@ -88,7 +111,6 @@
   padding: 0;
 }
 
-/* Code styling */
 .tiptap pre .hljs-comment,
 .tiptap pre .hljs-quote {
   color: #616161;

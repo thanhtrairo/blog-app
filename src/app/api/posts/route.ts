@@ -1,13 +1,13 @@
 import { NextResponse } from 'next/server'
 
-import prismaDb from '~/utils/prisma-db'
+import { POST_PER_PAGE } from '~/libs/constants'
 
-export async function GET(req: Request) {
+import { prismaDb } from '~/utils/prisma-db'
+
+export const GET = async (req: Request) => {
   const { searchParams } = new URL(req.url)
   const page = Number(searchParams.get('page'))
   const cat = searchParams.get('cat')
-
-  const POST_PER_PAGE = 2
 
   const query = {
     take: POST_PER_PAGE,
@@ -37,6 +37,7 @@ export const POST = async (req: Request) => {
 
     return new NextResponse(JSON.stringify(post))
   } catch (err) {
+    console.log('err', err)
     return new NextResponse(JSON.stringify({ message: err }), { status: 500 })
   }
 }

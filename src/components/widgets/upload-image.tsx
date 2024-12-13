@@ -2,10 +2,11 @@
 
 import Image from 'next/image'
 import { useState } from 'react'
-import { FIleValues, validateImage } from '~/models/file'
 
 import { Input } from '../ui/input'
 import { Label } from '../ui/label'
+
+import { FIleValues, validateImage } from '~/models/file'
 
 import { FileService } from '~/services'
 
@@ -25,7 +26,7 @@ export const UploadImage = ({ value, onChange, onChangeImgUrl }: UploadImageProp
       if (file) {
         const error = validateImage(file)
         if (error) {
-          alert(error)
+          throw new Error(error)
         }
         const formData = new FormData()
         formData.append('file', file)
@@ -57,7 +58,7 @@ export const UploadImage = ({ value, onChange, onChangeImgUrl }: UploadImageProp
       <div>
         <Label
           htmlFor="image-upload"
-          className={`cursor-pointer rounded-xl border border-input bg-white px-4 py-2 hover:bg-accent hover:text-accent-foreground ${loading && 'disabled:pointer-events-none cursor-default hover:bg-white'}`}
+          className={`cursor-pointer rounded-xl border border-input bg-white px-4 py-2 hover:bg-accent hover:text-accent-foreground ${loading && 'cursor-default hover:bg-white disabled:pointer-events-none'} dark:bg-accent`}
         >
           select image
         </Label>

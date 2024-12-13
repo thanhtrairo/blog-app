@@ -5,7 +5,7 @@ const cloudinaryApiSecret = process.env.CLOUDINARY_API_SECRET
 const cloudinaryApiKey = process.env.CLOUDINARY_API_KEY
 const cloudinaryCloudName = process.env.CLOUDINARY_CLOUD_NAME
 
-export async function POST(req: NextRequest) {
+export const POST = async (req: NextRequest) => {
   try {
     const formData = await req.formData()
     formData.append('upload_preset', process.env.NEXT_PUBLIC_CLOUDINARY_PRESET_NAME || '')
@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
   }
 }
 
-export async function DELETE(req: NextRequest) {
+export const DELETE = async (req: NextRequest) => {
   try {
     const { searchParams } = new URL(req.url)
     const url = searchParams.get('url')

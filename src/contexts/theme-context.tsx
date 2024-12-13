@@ -15,7 +15,7 @@ type ThemeContextType = {
 
 const ThemeContext = createContext<ThemeContextType | null>(null)
 
-const ThemeContextProvider = ({ children }: ThemeContextProviderProps) => {
+export const ThemeContextProvider = ({ children }: ThemeContextProviderProps) => {
   const [theme, setTheme] = useState<Theme>('light')
 
   useEffect(() => {
@@ -55,7 +55,7 @@ const ThemeContextProvider = ({ children }: ThemeContextProviderProps) => {
   )
 }
 
-const useThemeContext = () => {
+export const useThemeContext = () => {
   const theme = useContext(ThemeContext)
 
   if (!theme) {
@@ -64,6 +64,3 @@ const useThemeContext = () => {
 
   return theme
 }
-
-export default ThemeContextProvider
-export { useThemeContext }
