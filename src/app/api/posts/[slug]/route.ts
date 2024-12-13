@@ -2,8 +2,7 @@ import { Prisma } from '@prisma/client'
 import { NextResponse } from 'next/server'
 
 import { POST_PER_PAGE } from '~/libs/constants'
-
-import { prismaDb } from '~/utils/prisma-db'
+import { prismaDb } from '~/libs/prisma-db'
 
 export const GET = async (_req: Request, { params: { slug } }: { params: { slug: string } }) => {
   if (!slug) {

@@ -1,7 +1,7 @@
 import { mergeAttributes } from '@tiptap/core'
 import BaseHeading from '@tiptap/extension-heading'
 
-import { slugify } from '~/utils/helpers'
+import { slugify } from '~/libs/helpers'
 
 export enum LEVELS_HEADING {
   LEVEL1 = 1,

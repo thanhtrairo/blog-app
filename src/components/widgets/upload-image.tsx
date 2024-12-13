@@ -11,12 +11,12 @@ import { FIleValues, validateImage } from '~/models/file'
 import { FileService } from '~/services'
 
 type UploadImageProps = {
-  value: FIleValues | null
+  imgUrl?: string
   onChange: (value: FIleValues) => void
   onChangeImgUrl: (imgUrl: string) => void
 }
 
-export const UploadImage = ({ value, onChange, onChangeImgUrl }: UploadImageProps) => {
+export const UploadImage = ({ imgUrl, onChange, onChangeImgUrl }: UploadImageProps) => {
   const [loading, setLoading] = useState(false)
 
   const handleChangeFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,13 +44,13 @@ export const UploadImage = ({ value, onChange, onChangeImgUrl }: UploadImageProp
 
   return (
     <div className="space-y-2">
-      {value && (
+      {imgUrl && (
         <div className="relative h-60 w-60 overflow-hidden rounded-md">
           <Image
             fill={true}
             className="object-cover"
             alt="Image"
-            src={value.url}
+            src={imgUrl}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </div>

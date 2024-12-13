@@ -1,6 +1,5 @@
 'use client'
 
-import Code from '@tiptap/extension-code'
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight'
 import Link from '@tiptap/extension-link'
 import Placeholder from '@tiptap/extension-placeholder'
@@ -78,7 +77,6 @@ export const Tiptap = forwardRef<HTMLDivElement, TiptapProps>(({ disabled = fals
       CodeBlockLowlight.configure({
         lowlight,
       }),
-      Code,
       Video,
       Underline,
       Link.configure({

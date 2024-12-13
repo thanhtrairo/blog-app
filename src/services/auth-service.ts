@@ -1,22 +1,15 @@
 import { AxiosError } from 'axios'
 
-import { CreateFileRes } from '~/models/file'
+import { SignInInput, TAccount } from '~/models/auth'
 
 import { getErrorMessage } from '~/libs/helpers'
 import { httpRequest } from '~/libs/http-request'
 import { LOG_LEVELS, logger } from '~/libs/logger'
 
-export class FileService {
-  static create = async (formData: FormData, resource_type: 'video' | 'image' = 'image'): Promise<CreateFileRes> => {
+export class AuthService {
+  static SignIn = async (args: SignInInput): Promise<TAccount> => {
     try {
-      const posts = await httpRequest.post(`/api/upload`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-        params: {
-          resource_type,
-        },
-      })
+      const posts = await httpRequest.post(`/api/auth/sign-in`, args)
       return posts.data
     } catch (error) {
       logger(LOG_LEVELS.ERROR, getErrorMessage(error))

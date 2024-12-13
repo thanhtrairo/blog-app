@@ -1,4 +1,4 @@
-import { cn } from '~/utils/cn'
+import { cn } from '~/libs/utils'
 
 type SectionHeadingProps = {
   className?: string

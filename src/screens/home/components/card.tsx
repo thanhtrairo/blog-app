@@ -5,7 +5,13 @@ import Link from 'next/link'
 import { CAT_SLUG, imgByCat } from '~/models/category'
 import { TPost } from '~/models/post'
 
+const NUMBER_OF_CHARACTERS = 160
+
 export const Card = ({ imgUrl, createdAt, catSlug, title, slug, desc }: TPost) => {
+  const inputString = DOMPurify.sanitize(desc)
+  const startIndex = inputString.indexOf('<p')
+  const croppedString = inputString.slice(startIndex, startIndex + NUMBER_OF_CHARACTERS)
+
   return (
     <div className="flex items-center gap-12">
       {imgUrl && (
@@ -29,7 +35,7 @@ export const Card = ({ imgUrl, createdAt, catSlug, title, slug, desc }: TPost) =
         </Link>
         <div
           className="tiptap reset-css-tailwind line-clamp-2 p-0 text-lg font-light text-gray-c"
-          dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(desc).substring(0, 160) }}
+          dangerouslySetInnerHTML={{ __html: croppedString }}
         />
         <Link href={`/blogs/${slug}`} className="border-b-solid w-max border-b-[1px] border-b-red-500 py-1">
           Đọc thêm

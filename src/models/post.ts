@@ -12,3 +12,7 @@ export type TPost = {
 }
 
 export type PostCreate = Omit<TPost, 'id' | 'views' | 'createdAt' | 'cat'>
+
+export type PostUpdate = Partial<PostCreate> & {
+  id: string
+}
