@@ -4,11 +4,15 @@ import sha1 from 'sha1'
 const cloudinaryApiSecret = process.env.CLOUDINARY_API_SECRET
 const cloudinaryApiKey = process.env.CLOUDINARY_API_KEY
 const cloudinaryCloudName = process.env.CLOUDINARY_CLOUD_NAME
+const cloudinaryPresetName = process.env.CLOUDINARY_PRESET_NAME
 
 export const POST = async (req: NextRequest) => {
   try {
+    if (!cloudinaryPresetName || !cloudinaryPresetName) {
+      throw new Error('cloudinaryCloudName or cloudinaryPresetName not found')
+    }
     const formData = await req.formData()
-    formData.append('upload_preset', process.env.NEXT_PUBLIC_CLOUDINARY_PRESET_NAME || '')
+    formData.append('upload_preset', process.env.CLOUDINARY_PRESET_NAME || '')
     const { searchParams } = new URL(req.url)
     const resourceType = searchParams.get('resource_type')
     const file = formData.get('file')
