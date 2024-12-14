@@ -3,13 +3,13 @@ import type { NextRequest } from 'next/server'
 
 import { isLogin } from './libs/session'
 
-const authPaths = ['/sign-in']
+const authPaths = ['/login']
 const privatePaths = ['/write']
 
 export const middleware = async (request: NextRequest) => {
   const pathname = request.nextUrl.pathname
-  const isAuthPath = authPaths.some((path) => pathname.includes(path))
-  const isprivatePath = privatePaths.some((path) => pathname.includes(path))
+  const isAuthPath = authPaths.some((path) => pathname.startsWith(path))
+  const isprivatePath = privatePaths.some((path) => pathname.startsWith(path))
   const loggedIn = await isLogin()
 
   if (loggedIn && isAuthPath) {

@@ -69,6 +69,7 @@ export const LoginContainer = () => {
           />
           <Input
             placeholder="Password"
+            type="password"
             value={formValues.password}
             onChange={(e) => handleChangeForm(e.target.value, 'password')}
           />

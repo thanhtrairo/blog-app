@@ -4,6 +4,12 @@ import { BlogContainer } from '~/screens/blog/containers'
 
 import { PostService } from '~/services'
 
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+  return {
+    title: `${params.slug} | thanhtrairo`,
+  }
+}
+
 const BlogDetailPage = async ({ params: { slug } }: { params: { slug: string } }) => {
   const { post, postsRelated } = await PostService.getDetail({ slug })
   if (!post) {
