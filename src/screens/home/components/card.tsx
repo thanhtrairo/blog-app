@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { CAT_SLUG, imgByCat } from '~/models/category'
 import { TPost } from '~/models/post'
 
+import { formatDateDefault } from '~/libs/utils'
+
 const NUMBER_OF_CHARACTERS = 160
 
 export const Card = ({ imgUrl, createdAt, catSlug, title, slug, desc }: TPost) => {
@@ -27,7 +29,7 @@ export const Card = ({ imgUrl, createdAt, catSlug, title, slug, desc }: TPost) =
       )}
       <div className="flex flex-1 flex-col gap-3">
         <div className="flex items-center gap-1">
-          <span className="text-sm text-gray-c">{new Date(createdAt).toDateString()} - </span>
+          <span className="text-sm text-gray-c">{formatDateDefault(createdAt)} - </span>
           <Image alt="catSlug" src={imgByCat[catSlug as CAT_SLUG]} width={32} height={32} />
         </div>
         <Link href={`/blogs/${slug}`}>

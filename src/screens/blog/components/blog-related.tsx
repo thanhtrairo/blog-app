@@ -4,6 +4,8 @@ import Link from 'next/link'
 import { CAT_SLUG, imgByCat } from '~/models/category'
 import { TPost } from '~/models/post'
 
+import { formatDateDefault } from '~/libs/utils'
+
 export const BlogRelated = ({ catSlug, createdAt, slug, title }: TPost) => {
   return (
     <Link href={slug} className="flex flex-col gap-8">
@@ -13,7 +15,7 @@ export const BlogRelated = ({ catSlug, createdAt, slug, title }: TPost) => {
           <h3 className="text-lg font-medium">{title}</h3>
           <div className="text-xs">
             <span>Thanhtrairo</span>
-            <span className="text-gray-500"> - {new Date(createdAt).toDateString()}</span>
+            <span className="text-gray-500"> - {formatDateDefault(createdAt)}</span>
           </div>
         </div>
       </div>

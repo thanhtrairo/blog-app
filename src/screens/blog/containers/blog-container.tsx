@@ -7,6 +7,8 @@ import { SectionHeading } from '~/components/widgets'
 
 import { TPost } from '~/models/post'
 
+import { formatDateDefault } from '~/libs/utils'
+
 type BlogContainerProps = {
   post: TPost
   postsRelated: TPost[]
@@ -31,7 +33,7 @@ export const BlogContainer = ({ post, postsRelated }: BlogContainerProps) => {
               />
               <div className="flex flex-col gap-1">
                 <span className="text-lg font-medium">Thanhtrairo</span>
-                <span className="text-sm">{new Date(post.createdAt).toDateString()}</span>
+                <span className="text-sm">{formatDateDefault(post.createdAt)}</span>
               </div>
             </div>
           </div>
