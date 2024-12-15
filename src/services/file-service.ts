@@ -26,4 +26,17 @@ export class FileService {
       throw error
     }
   }
+
+  static delete = async (imgUrl: string) => {
+    try {
+      const posts = await httpRequest.delete(`/api/upload?url=${imgUrl}`)
+      return posts.data
+    } catch (error) {
+      logger(LOG_LEVELS.ERROR, getErrorMessage(error))
+      if (error instanceof AxiosError) {
+        throw new Error(error.response?.data.message)
+      }
+      throw error
+    }
+  }
 }

@@ -16,6 +16,8 @@ import ImageResize from 'tiptap-extension-resize-image'
 import { Toolbar } from './components'
 import { Heading, Video } from './extensions'
 
+import { FileService } from '~/services'
+
 import css from 'highlight.js/lib/languages/css'
 
 const lowlight = createLowlight()
@@ -32,19 +34,8 @@ type TiptapProps = {
 
 export const Tiptap = forwardRef<HTMLDivElement, TiptapProps>(({ disabled = false, content, onChange }, forwardRef) => {
   const [filesSrc, setFilesSrc] = useState<string[]>([])
-  const [fileIds, setFileIds] = useState<string[]>([])
+  const [filesSrcRemove, setFilesSrcRemove] = useState<string[]>([])
   const filesSrcRef = useRef<string[]>([])
-
-  const extractId = (url: string) => {
-    const lastSlashIndex = url.lastIndexOf('/')
-    const filename = url.substring(lastSlashIndex + 1)
-    const uuid = filename.split('.')[0]
-    return uuid
-  }
-
-  const extractIdsFromArray = (urls: string[]) => {
-    return urls.map((url) => extractId(url))
-  }
 
   const handleUpdate = ({ editor }: EditorEvents['update']) => {
     if (!editor) {
@@ -56,8 +47,7 @@ export const Tiptap = forwardRef<HTMLDivElement, TiptapProps>(({ disabled = fals
     const videoSrc = videos?.map((video) => video.attributes.src) || []
     const filesSrc = [...imagesSrc, ...videoSrc]
     const filesSrcRemove = filesSrcRef.current.filter((src) => !filesSrc.includes(src))
-    const fileIds = extractIdsFromArray(filesSrcRemove)
-    setFileIds(fileIds)
+    setFilesSrcRemove(filesSrcRemove)
     setFilesSrc(filesSrc)
     onChange(editor.view.dom.innerHTML)
   }
@@ -104,16 +94,21 @@ export const Tiptap = forwardRef<HTMLDivElement, TiptapProps>(({ disabled = fals
   useEffect(() => {
     ;(async () => {
       try {
-        if (fileIds.length > 0) {
+        if (filesSrcRemove.length > 0) {
           editor?.setEditable(false)
-          // await FileService.removeMulti(fileIds)
+          await Promise.all(
+            filesSrcRemove.map(async (fileSrc) => {
+              await FileService.delete(fileSrc)
+            }),
+          )
           editor?.setEditable(true)
         }
       } catch (error) {
         alert('System error while deleting files')
       }
     })()
-  }, [editor, fileIds])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [JSON.stringify(filesSrcRemove)])
 
   useEffect(() => {
     filesSrcRef.current = filesSrc

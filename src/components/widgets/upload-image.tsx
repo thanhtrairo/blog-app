@@ -31,6 +31,7 @@ export const UploadImage = ({ imgUrl, onChange, onChangeImgUrl }: UploadImagePro
         const formData = new FormData()
         formData.append('file', file)
         const { uploadedImageData } = await FileService.create(formData)
+        imgUrl && (await FileService.delete(imgUrl))
         onChange(Object.assign(file, { url: uploadedImageData.url }))
         onChangeImgUrl(uploadedImageData.url)
       }

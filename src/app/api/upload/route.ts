@@ -48,7 +48,7 @@ export const DELETE = async (req: NextRequest) => {
         message: 'url, cloudinaryApiSecret, cloudinaryApiKey or cloudinaryCloudName invalid',
       })
     }
-    const regex = /\/upload\/v\d+\/(uploadimages\/[^.]+)\.\w{3,4}$/
+    const regex = /\/upload\/v\d+\/([^/]+?)(?:\.[^/]+)?$/
     const publicId = url.match(regex)
     if (!publicId) {
       return NextResponse.json({ success: false, message: 'no url found' })
@@ -73,6 +73,6 @@ export const DELETE = async (req: NextRequest) => {
       status: 200,
     })
   } catch (error) {
-    return NextResponse.json({ message: 'Error', status: 500 })
+    return NextResponse.json({ message: error, status: 500 })
   }
 }
