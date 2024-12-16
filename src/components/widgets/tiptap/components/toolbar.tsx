@@ -21,6 +21,7 @@ import {
 
 import { Bulkhead } from './bulkhead'
 import { Hyperlink } from './hyperlink'
+import { Table } from './table'
 
 import { Input } from '~/components/ui/input'
 import { Label } from '~/components/ui/label'
@@ -126,6 +127,8 @@ export const Toolbar = ({ editor }: ToolbarProps) => {
         >
           <Heading2 className="h-4 w-4" />
         </button>
+        <Bulkhead />
+        <Table editor={editor} />
         <Bulkhead />
         <Hyperlink editor={editor} />
         <Bulkhead />

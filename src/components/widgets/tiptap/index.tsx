@@ -3,6 +3,10 @@
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight'
 import Link from '@tiptap/extension-link'
 import Placeholder from '@tiptap/extension-placeholder'
+import Table from '@tiptap/extension-table'
+import TableCell from '@tiptap/extension-table-cell'
+import TableHeader from '@tiptap/extension-table-header'
+import TableRow from '@tiptap/extension-table-row'
 import Underline from '@tiptap/extension-underline'
 import { EditorContent, EditorEvents, Extensions, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
@@ -63,6 +67,12 @@ export const Tiptap = forwardRef<HTMLDivElement, TiptapProps>(({ disabled = fals
         codeBlock: false,
         heading: false,
       }),
+      Table.configure({
+        resizable: true,
+      }),
+      TableRow,
+      TableHeader,
+      TableCell,
       Heading,
       CodeBlockLowlight.configure({
         lowlight,

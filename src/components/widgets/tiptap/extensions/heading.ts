@@ -21,7 +21,7 @@ export const Heading = BaseHeading.configure({ levels: [1, 2] }).extend({
       `h${level}`,
       mergeAttributes(this.options.HTMLAttributes, HTMLAttributes, {
         class: `!${classes[level]} font-medium`,
-        id: slugify(node.content.content[0].text || ''),
+        id: slugify(node.content.content[0]?.text || ''),
       }),
       0,
     ]

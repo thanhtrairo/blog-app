@@ -8,7 +8,7 @@ const cloudinaryPresetName = process.env.CLOUDINARY_PRESET_NAME
 
 export const POST = async (req: NextRequest) => {
   try {
-    if (!cloudinaryPresetName || !cloudinaryPresetName) {
+    if (!cloudinaryCloudName || !cloudinaryPresetName) {
       throw new Error('cloudinaryCloudName or cloudinaryPresetName not found')
     }
     const formData = await req.formData()
@@ -34,7 +34,7 @@ export const POST = async (req: NextRequest) => {
       status: 200,
     })
   } catch (error) {
-    return NextResponse.json({ message: 'Error', status: 500 })
+    return NextResponse.json({ message: error, status: 500 })
   }
 }
 

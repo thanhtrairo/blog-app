@@ -59,7 +59,7 @@ export const UploadImage = ({ imgUrl, onChange, onChangeImgUrl }: UploadImagePro
       <div>
         <Label
           htmlFor="image-upload"
-          className={`cursor-pointer rounded-xl border border-input bg-white px-4 py-2 hover:bg-accent hover:text-accent-foreground ${loading && 'cursor-default hover:bg-white disabled:pointer-events-none'} dark:bg-accent`}
+          className={`cursor-pointer rounded-xl border border-input bg-white px-4 py-2 hover:bg-accent hover:text-accent-foreground ${loading && 'cursor-default hover:bg-white disabled:pointer-events-none'} dark:text-black-c`}
         >
           select image
         </Label>
