@@ -50,7 +50,7 @@ export const BlogContainer = ({ post, postsRelated }: BlogContainerProps) => {
           )}
           <div
             className="tiptap reset-css-tailwind p-0"
-            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post?.desc) }}
+            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post?.desc, { ADD_TAGS: ['iframe'] }) }}
           />
         </div>
         <div className="basis-1/5 max-lg:hidden">

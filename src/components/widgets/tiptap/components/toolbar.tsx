@@ -21,6 +21,7 @@ import {
 
 import { Bulkhead } from './bulkhead'
 import { Hyperlink } from './hyperlink'
+import { Iframe } from './iframe'
 import { Table } from './table'
 
 import { Input } from '~/components/ui/input'
@@ -131,6 +132,7 @@ export const Toolbar = ({ editor }: ToolbarProps) => {
         <Table editor={editor} />
         <Bulkhead />
         <Hyperlink editor={editor} />
+        <Iframe editor={editor} />
         <Bulkhead />
         <button
           type="button"

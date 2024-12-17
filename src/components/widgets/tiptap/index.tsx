@@ -18,7 +18,7 @@ import { forwardRef, useEffect, useRef, useState } from 'react'
 import ImageResize from 'tiptap-extension-resize-image'
 
 import { Toolbar } from './components'
-import { Heading, Video } from './extensions'
+import { Heading, Iframe, Video } from './extensions'
 
 import { FileService } from '~/services'
 
@@ -70,6 +70,7 @@ export const Tiptap = forwardRef<HTMLDivElement, TiptapProps>(({ disabled = fals
       Table.configure({
         resizable: true,
       }),
+      Iframe,
       TableRow,
       TableHeader,
       TableCell,
