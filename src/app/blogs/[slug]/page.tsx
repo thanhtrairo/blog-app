@@ -4,6 +4,8 @@ import { BlogContainer } from '~/screens/blog/containers'
 
 import { PostService } from '~/services'
 
+export const dynamic = 'force-static'
+
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   return {
     title: `${params.slug} | thanhtrairo`,
