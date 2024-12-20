@@ -1,3 +1,5 @@
+import { Suspense } from 'react'
+
 import { Cards, Categories } from '../components'
 
 import { TPost } from '~/models/post'
@@ -15,7 +17,9 @@ export const HomeContainer = ({ page, count, posts }: HomeContainerProps) => {
         <Cards data={posts} page={page} count={count} />
       </div>
       <div className="basis-1/5">
-        <Categories />
+        <Suspense>
+          <Categories />
+        </Suspense>
       </div>
     </div>
   )

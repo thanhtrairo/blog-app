@@ -2,16 +2,17 @@ import { AxiosError } from 'axios'
 
 import { PostCreate, PostUpdate, TPost } from '~/models/post'
 
+import { DEFAULT_PAGE } from '~/libs/constants'
 import { getErrorMessage } from '~/libs/helpers'
 import { httpRequest } from '~/libs/http-request'
 import { LOG_LEVELS, logger } from '~/libs/logger'
 
 export class PostService {
   static getAll = async ({
-    page,
-    cat,
+    page = DEFAULT_PAGE,
+    cat = '',
   }: {
-    page?: number
+    page?: number | string
     cat?: string
   }): Promise<{
     posts: TPost[]
@@ -19,7 +20,10 @@ export class PostService {
   }> => {
     try {
       const posts = await httpRequest.get(`/api/posts`, {
-        params: { page, cat },
+        params: {
+          page,
+          cat,
+        },
       })
       return posts.data
     } catch (error) {
@@ -33,8 +37,8 @@ export class PostService {
 
   static create = async (args: PostCreate): Promise<TPost> => {
     try {
-      const posts = await httpRequest.post(`/api/posts`, args)
-      return posts.data
+      const post = await httpRequest.post(`/api/posts`, args)
+      return post.data
     } catch (error) {
       logger(LOG_LEVELS.ERROR, getErrorMessage(error))
       if (error instanceof AxiosError) {
@@ -46,8 +50,8 @@ export class PostService {
 
   static update = async (args: PostUpdate): Promise<TPost> => {
     try {
-      const posts = await httpRequest.patch(`/api/posts`, args)
-      return posts.data
+      const post = await httpRequest.patch(`/api/posts`, args)
+      return post.data
     } catch (error) {
       logger(LOG_LEVELS.ERROR, getErrorMessage(error))
       if (error instanceof AxiosError) {
@@ -66,8 +70,8 @@ export class PostService {
     postsRelated: TPost[]
   }> => {
     try {
-      const posts = await httpRequest.get(`/api/posts/${slug}`)
-      return posts.data
+      const post = await httpRequest.get(`/api/posts/${slug}`)
+      return post.data
     } catch (error) {
       logger(LOG_LEVELS.ERROR, getErrorMessage(error))
       return {

@@ -31,7 +31,7 @@ export const Hyperlink = ({ editor }: HyperlinkProps) => {
       <button
         type="button"
         onClick={handleOpenModal}
-        className={`${editor.isActive('link') ? 'bg-theme rounded-lg text-white' : 'text-gray-500'} p-2`}
+        className={`${editor.isActive('link') ? 'bg-theme rounded-lg dark:text-white' : 'text-gray-500'} p-2`}
       >
         <Link2 className="h-4 w-4" />
       </button>
@@ -39,7 +39,7 @@ export const Hyperlink = ({ editor }: HyperlinkProps) => {
         <button
           type="button"
           onClick={() => editor.chain().focus().unsetLink().run()}
-          className={`${editor.isActive('link') ? 'bg-theme rounded-lg text-white' : 'text-gray-500'} p-2`}
+          className={`${editor.isActive('link') ? 'bg-theme rounded-lg dark:text-white' : 'text-gray-500'} p-2`}
         >
           <Link2Off className="h-4 w-4" />
         </button>

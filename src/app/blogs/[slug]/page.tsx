@@ -5,6 +5,7 @@ import { BlogContainer } from '~/screens/blog/containers'
 import { PostService } from '~/services'
 
 export const dynamic = 'force-static'
+export const revalidate = 86400 // every day
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   return {

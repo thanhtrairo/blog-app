@@ -78,6 +78,10 @@
   margin-top: 0;
 }
 
+.tiptap * {
+  white-space: break-spaces;
+}
+
 .tiptap img {
   margin: 1rem 0px;
 }

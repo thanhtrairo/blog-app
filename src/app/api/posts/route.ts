@@ -1,11 +1,11 @@
 import { NextResponse } from 'next/server'
 
-import { POST_PER_PAGE } from '~/libs/constants'
+import { DEFAULT_PAGE, POST_PER_PAGE } from '~/libs/constants'
 import { prismaDb } from '~/libs/prisma-db'
 
 export const GET = async (req: Request) => {
   const { searchParams } = new URL(req.url)
-  const page = Number(searchParams.get('page'))
+  const page = Number(searchParams.get('page')) || DEFAULT_PAGE
   const cat = searchParams.get('cat')
 
   const where = {
