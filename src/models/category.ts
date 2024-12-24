@@ -3,6 +3,7 @@ export enum CAT_SLUG {
   NEXT_JS = 'NextJs',
   HTML_CSS = 'HTML_CSS',
   JAVASCRIPT = 'JavaScript',
+  TYPESCRIPT = 'Typescript',
   PERFORMANCE = 'Performance',
 }
 
@@ -11,6 +12,7 @@ export const imgByCat = {
   [CAT_SLUG.NEXT_JS]: '/nextjs.webp',
   [CAT_SLUG.HTML_CSS]: '/html_css.webp',
   [CAT_SLUG.JAVASCRIPT]: '/javascript.webp',
+  [CAT_SLUG.TYPESCRIPT]: '/typescript.webp',
   [CAT_SLUG.PERFORMANCE]: '/performance.webp',
 }
 
@@ -30,6 +32,10 @@ export const catOptions = [
   {
     value: CAT_SLUG.JAVASCRIPT,
     label: 'Javascript',
+  },
+  {
+    value: CAT_SLUG.TYPESCRIPT,
+    label: 'Typescript',
   },
   {
     value: CAT_SLUG.PERFORMANCE,
