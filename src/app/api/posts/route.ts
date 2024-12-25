@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 
+import { getFromCache, setCache } from '~/libs/cache-api'
 import { DEFAULT_PAGE, POST_PER_PAGE } from '~/libs/constants'
 import { prismaDb } from '~/libs/prisma-db'
 
@@ -7,6 +8,11 @@ export const GET = async (req: Request) => {
   const { searchParams } = new URL(req.url)
   const page = Number(searchParams.get('page')) || DEFAULT_PAGE
   const cat = searchParams.get('cat')
+  const keyCache = `page=${page}&cat=${cat}`
+  const cachedData = getFromCache(keyCache)
+  if (cachedData) {
+    return NextResponse.json(cachedData)
+  }
 
   const where = {
     ...(cat && { catSlug: cat }),
@@ -24,6 +30,7 @@ export const GET = async (req: Request) => {
       }),
       prismaDb.post.count({ where }),
     ])
+    setCache(keyCache, { posts, count })
     return NextResponse.json({ posts, count })
   } catch (err) {
     return new NextResponse(JSON.stringify({ message: err }), { status: 500 })
