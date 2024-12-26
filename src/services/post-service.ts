@@ -16,7 +16,7 @@ export class PostService {
     cat?: string
   }): Promise<{
     posts: TPost[]
-    count: number
+    totalPage: number
   }> => {
     try {
       const posts = await httpRequest.get(`/api/posts`, {
@@ -30,7 +30,7 @@ export class PostService {
       logger(LOG_LEVELS.ERROR, getErrorMessage(error))
       return {
         posts: [],
-        count: 0,
+        totalPage: 0,
       }
     }
   }

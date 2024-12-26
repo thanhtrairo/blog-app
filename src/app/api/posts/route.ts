@@ -30,8 +30,9 @@ export const GET = async (req: Request) => {
       }),
       prismaDb.post.count({ where }),
     ])
-    setCache(keyCache, { posts, count })
-    return NextResponse.json({ posts, count })
+    const totalPage = Math.ceil(count / POST_PER_PAGE)
+    setCache(keyCache, { posts, totalPage })
+    return NextResponse.json({ posts, totalPage })
   } catch (err) {
     return new NextResponse(JSON.stringify({ message: err }), { status: 500 })
   }

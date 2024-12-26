@@ -1,30 +1,31 @@
 import { Card } from './card'
 
-import { Pagination, SectionHeading } from '~/components/widgets'
+import { PaginationCustom as Pagination } from '~/components/widgets'
 
-import { TPost } from '~/models/post'
+import { CAT_SLUG } from '~/models/category'
 
-import { POST_PER_PAGE } from '~/libs/constants'
+import { PostService } from '~/services'
 
 type CardsProps = {
-  data: TPost[]
-  page: number
-  count: number
+  page?: string
+  cat?: string
 }
 
-export const Cards = ({ data, page, count }: CardsProps) => {
-  const hasPrev = POST_PER_PAGE * (page - 1) > 0
-  const hasNext = POST_PER_PAGE * (page - 1) + POST_PER_PAGE < count
+export const Cards = async ({ page, cat }: CardsProps) => {
+  const newCat = Object.values(CAT_SLUG).includes(cat as CAT_SLUG) ? cat : undefined
+  const { posts, totalPage } = await PostService.getAll({ page, cat: newCat })
+  if (posts.length === 0) {
+    return <p>Không tìm thấy bài viết nào</p>
+  }
 
   return (
-    <section className="space-y-8">
-      <SectionHeading>Bài viết</SectionHeading>
+    <>
       <div className="space-y-6">
-        {data.map((post) => (
+        {posts.map((post) => (
           <Card {...post} key={post.id} />
         ))}
       </div>
-      {data.length > 0 ? <Pagination page={page} hasPrev={hasPrev} hasNext={hasNext} /> : null}
-    </section>
+      {totalPage > 0 ? <Pagination totalPage={totalPage} className="justify-center px-12 py-4" /> : null}
+    </>
   )
 }
