@@ -7,6 +7,8 @@ import { SectionHeading } from '~/components/widgets'
 
 import { catOptionsForFilter } from '~/models/category'
 
+import { DEFAULT_PAGE } from '~/libs/constants'
+
 export const Categories = () => {
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -21,6 +23,7 @@ export const Categories = () => {
     } else {
       params.delete('cat')
     }
+    params.set('page', DEFAULT_PAGE.toString())
     router.replace(`${pathname}?${params.toString()}`)
   }
 
