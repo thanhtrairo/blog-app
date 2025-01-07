@@ -5,6 +5,7 @@ export enum CAT_SLUG {
   JAVASCRIPT = 'JavaScript',
   TYPESCRIPT = 'Typescript',
   PERFORMANCE = 'Performance',
+  OTHER = 'Other',
 }
 
 export const imgByCat = {
@@ -14,6 +15,7 @@ export const imgByCat = {
   [CAT_SLUG.JAVASCRIPT]: '/javascript.webp',
   [CAT_SLUG.TYPESCRIPT]: '/typescript.webp',
   [CAT_SLUG.PERFORMANCE]: '/performance.webp',
+  [CAT_SLUG.OTHER]: '/setting.webp',
 }
 
 export const catOptions = [
@@ -40,6 +42,10 @@ export const catOptions = [
   {
     value: CAT_SLUG.PERFORMANCE,
     label: 'Performance',
+  },
+  {
+    value: CAT_SLUG.OTHER,
+    label: 'Khác',
   },
 ]
 
