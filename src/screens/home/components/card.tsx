@@ -7,12 +7,11 @@ import { TPost } from '~/models/post'
 
 import { formatDateDefault } from '~/libs/utils'
 
-const NUMBER_OF_CHARACTERS = 160
-
 export const Card = ({ imgUrl, createdAt, catSlug, title, slug, desc }: TPost) => {
   const inputString = DOMPurify.sanitize(desc)
   const startIndex = inputString.indexOf('<p')
-  const croppedString = inputString.slice(startIndex, startIndex + NUMBER_OF_CHARACTERS)
+  const endIndex = inputString.indexOf('</p>')
+  const croppedString = inputString.slice(startIndex, endIndex)
 
   return (
     <div className="flex items-center gap-12">
