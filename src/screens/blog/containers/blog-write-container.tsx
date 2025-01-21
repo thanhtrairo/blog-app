@@ -1,6 +1,5 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 import { Button } from '~/components/ui/button'
@@ -12,6 +11,7 @@ import { CAT_SLUG, catOptions } from '~/models/category'
 import { FIleValues } from '~/models/file'
 import { TPost } from '~/models/post'
 
+import { reloadCache } from '~/libs/action'
 import { slugify } from '~/libs/helpers'
 
 import { PostService } from '~/services'
@@ -48,7 +48,6 @@ export const BlogWriteContainer = ({ initialData }: BlogWriteContainerProps) => 
       }
   const [formValues, setFormValues] = useState<FormValues>(defaultValues)
   const [loading, setLoading] = useState(false)
-  const router = useRouter()
 
   const handleChangeForm = (value: string | FIleValues, name: keyof FormValues) => {
     setFormValues((prev) => ({
@@ -71,25 +70,26 @@ export const BlogWriteContainer = ({ initialData }: BlogWriteContainerProps) => 
       }
       const { catSlug, desc, imgUrl, title } = formValues
       let blog = null
+      const slug = slugify(title)
       if (initialData) {
         blog = await PostService.update({
           id: initialData.id,
           catSlug: catSlug,
           desc,
           imgUrl,
-          slug: slugify(title),
+          slug,
           title,
         })
+        reloadCache(`/blogs/${blog.slug}`)
       } else {
         blog = await PostService.create({
           catSlug: catSlug,
           desc,
           imgUrl,
-          slug: slugify(title),
+          slug,
           title,
         })
       }
-      router.push(`/blogs/${blog.slug}`)
     } catch (error) {
       alert(error)
     } finally {
