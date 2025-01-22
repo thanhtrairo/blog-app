@@ -16,7 +16,7 @@ export const Card = ({ imgUrl, createdAt, catSlug, title, slug, desc }: TPost) =
   return (
     <div className="flex items-center gap-12">
       {imgUrl && (
-        <Link href={`/blogs/${slug}`} className="relative h-64 flex-1 max-sm:hidden">
+        <Link href={`/blogs/${slug}`} className="relative h-64 flex-1 shrink-0 max-sm:hidden">
           <Image
             src={imgUrl}
             alt={title}
