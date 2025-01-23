@@ -15,10 +15,9 @@ import ts from 'highlight.js/lib/languages/typescript'
 import html from 'highlight.js/lib/languages/xml'
 import { createLowlight } from 'lowlight'
 import { forwardRef, useEffect, useRef, useState } from 'react'
-import ImageResize from 'tiptap-extension-resize-image'
 
 import { Toolbar } from './components'
-import { Heading, Iframe, Video } from './extensions'
+import { Heading, Iframe, Image, Video } from './extensions'
 
 import { FileService } from '~/services'
 
@@ -90,12 +89,12 @@ export const Tiptap = forwardRef<HTMLDivElement, TiptapProps>(({ disabled = fals
         emptyNodeClass:
           'first:before:text-gray-500 first:before:float-left first:before:content-[attr(data-placeholder)] first:before:pointer-events-none',
       }),
-      ImageResize,
+      Image,
     ] as Extensions,
     content,
     editorProps: {
       attributes: {
-        class: 'reset-css-tailwind min-h-60 ',
+        class: 'reset-css-tailwind min-h-60',
       },
     },
     immediatelyRender: false,
