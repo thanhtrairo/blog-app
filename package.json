@@ -47,11 +47,11 @@
     "jose": "^5.9.6",
     "lowlight": "^3.2.0",
     "lucide-react": "^0.468.0",
+    "medium-zoom": "^1.1.0",
     "next": "14.1.0",
     "react": "^18",
     "react-dom": "^18",
     "sha1": "^1.1.1",
-    "sharp": "^0.33.5",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
     "tiptap-extension-resize-image": "^1.2.1"

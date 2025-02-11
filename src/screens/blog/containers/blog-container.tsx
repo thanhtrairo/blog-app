@@ -1,7 +1,7 @@
-import DOMPurify from 'isomorphic-dompurify'
 import Image from 'next/image'
 
 import { BlogsRelated, TableOfContent } from '../components'
+import { BlogContent } from './blog-content'
 
 import { SectionHeading } from '~/components/widgets'
 
@@ -48,10 +48,7 @@ export const BlogContainer = ({ post, postsRelated }: BlogContainerProps) => {
               />
             </div>
           )}
-          <div
-            className="tiptap reset-css-tailwind p-0"
-            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post?.desc, { ADD_TAGS: ['iframe'] }) }}
-          />
+          <BlogContent desc={post.desc} />
         </div>
         <div className="basis-1/5 max-lg:hidden">
           <TableOfContent />
