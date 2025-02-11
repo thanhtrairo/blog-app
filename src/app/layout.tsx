@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google'
 
 import './globals.css'
 
-import { Footer, Header } from '~/components/widgets'
+import { BackToTop, Footer, Header } from '~/components/widgets'
 
 import { ThemeContextProvider } from '~/contexts/theme-context'
 
@@ -27,6 +27,7 @@ const RootLayout = ({
             <div className="container mx-auto px-2 sm:px-4 md:px-8 lg:px-12 xl:px-16 2xl:px-20">
               <Header />
               {children}
+              <BackToTop />
               <Footer />
             </div>
           </div>

@@ -1,3 +1,4 @@
+import { House } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -6,7 +7,7 @@ import { ThemeSwitch } from './theme-switch'
 
 const socials = [
   {
-    href: 'https://github.com/thanhtrairo?tab=repositories',
+    href: 'https://github.com/thanhtrairo',
     imageUrl: '/github.webp',
   },
   {
@@ -30,7 +31,10 @@ export const Header = () => {
         ))}
       </div>
       <div className="text-center text-2xl font-bold sm:text-3xl xl:text-4xl">
-        <Link href="/">thanhtrairo</Link>
+        <Link href="/" className="flex items-center gap-2">
+          <House className="stroke-[2.4]" />
+          thanhtrairo
+        </Link>
       </div>
       <ThemeSwitch />
     </header>
